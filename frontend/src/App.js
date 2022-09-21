@@ -18,14 +18,12 @@ function App() {
       data.append("file", file);
       data.append("filename", file.name);
       axios
-        .post(
-          "https://speech-recognition-web.herokuapp.com/convert-audio",
-          data
-        )
+        .post("http://127.0.0.1:5000" + CONVERT_AUDIO, data)
         .then((res) => {
           setTranscript(res.data.text);
           setLoading(false);
-        });
+        })
+        .catch((err) => console.log(err));
     } else {
       alert("Zły format pliku");
       setLoading(false);

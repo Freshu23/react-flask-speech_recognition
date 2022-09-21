@@ -3,10 +3,11 @@ from flask import Flask,request,send_from_directory
 from flask_cors import CORS, cross_origin
 import speech_recognition as sr
 
-app = Flask(__name__,static_folder='./frontend/build',static_url_path='')
-# cors = CORS(app)
+app = Flask(__name__,static_folder='frontend/build',static_url_path='')
+cors = CORS(app)
 
 @app.route("/", defaults={'path':''})
+@cross_origin()
 def serve(path):
     return send_from_directory(app.static_folder,'index.html')
 
@@ -15,12 +16,12 @@ def get_time():
     return {'time': time.time()}
 
 @app.route('/api/hello')
-# @cross_origin()
+@cross_origin()
 def hello():
     return {'hello': 'world'}
 
 @app.route('/convert-audio', methods=['POST'])
-# @cross_origin()
+@cross_origin()
 def convert_audio():
     if request.method == 'POST':
         if "file" not in request.files:
