@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://127.0.0.1:5000",
+  "proxy": "https://lit-peak-41674.herokuapp.com/",
   "dependencies": {
     "@mantine/core": "^4.2.12",
     "@mantine/hooks": "^4.2.12",
