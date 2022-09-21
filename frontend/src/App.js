@@ -21,7 +21,7 @@ function App() {
       data.append("file", file);
       data.append("filename", file.name);
       axios
-        .post("http://127.0.0.1:5000" + CONVERT_AUDIO, data)
+        .post(CONVERT_AUDIO, data)
         .then((res) => {
           setTranscript(res.data.text);
           setLoading(false);
