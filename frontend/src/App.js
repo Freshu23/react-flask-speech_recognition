@@ -9,8 +9,11 @@ function App() {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [transcript, setTranscript] = useState("");
+  const [isError, setIsError] = useState(false);
+
   const handleFileUpload = (event) => {
     event.preventDefault();
+    setIsError(false);
     setLoading(true);
     if (checkFileType(file)) {
       const data = new FormData();
@@ -23,13 +26,19 @@ function App() {
           setTranscript(res.data.text);
           setLoading(false);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          setIsError(true);
+        });
     } else {
       alert("Zły format pliku");
       setLoading(false);
     }
   };
-
+  const handleCopyText = () => {
+    navigator.clipboard
+      .writeText(transcript)
+      .then(() => alert("Skopiowano tekst"));
+  };
   return (
     <div className="container">
       <h1>Wgraj plik audio w formacie .wav</h1>
@@ -44,6 +53,18 @@ function App() {
           <>
             <p>Ładowanie...</p> <Loader />
           </>
+        )}
+        {isError && (
+          <p style={{ color: "red" }}>Wystąpił błąd nieoczkiwany błąd :(</p>
+        )}
+        {transcript && (
+          <button
+            className="copyTextBtn"
+            onClick={handleCopyText}
+            type="button"
+          >
+            Skopiuj tekst
+          </button>
         )}
         {transcript && <p>{transcript}</p>}
       </form>

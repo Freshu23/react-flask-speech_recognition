@@ -22,3 +22,9 @@ button {
   cursor: pointer;
   font-weight: 500;
 }
+.container .copyTextBtn {
+  background-color: white;
+  border: 1px solid black;
+  box-sizing: border-box;
+  color: black;
+}
